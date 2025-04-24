@@ -1,5 +1,4 @@
---extra-index-url https://download.pytorch.org/whl/cu117
-torch==2.0.0+cu117
+torch
 packaging
 fairscale
 sentencepiece
@@ -7,9 +6,8 @@ Pillow
 huggingface_hub
 open_clip_torch==2.23.0
 decord
-pytorchvideo==0.1.5
+git+https://github.com/facebookresearch/pytorchvideo.git
 torchaudio
 matplotlib
-flash-attn
 gradio
 pandas

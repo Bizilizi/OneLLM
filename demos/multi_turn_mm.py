@@ -19,7 +19,7 @@ from model.meta import MetaModel
 from data.conversation_lib import conv_templates, SeparatorStyle
 from PIL import Image
 import torchvision.transforms as transforms
-from data.fintune_dataset import make_audio_features
+from data.finetune_dataset import make_audio_features
 from data import video_utils 
 
 
@@ -231,7 +231,7 @@ def gradio_worker(
         undo_button.click(undo, chatbot, chatbot)
         # img_path.change(clear, [], [chatbot, msg])
     barrier.wait()
-    demo.queue(api_open=True).launch(share=True, max_threads=1)
+    demo.launch(share=True, max_threads=1)
 
 
 if __name__ == "__main__":
