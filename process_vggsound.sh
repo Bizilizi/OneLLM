@@ -15,6 +15,17 @@
 
 nvidia-smi
 
+# Mount squashfs files
+cleanup () {
+    fusermount -u /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
+    rmdir /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
+}
+
+trap cleanup EXIT
+
+mkdir -p /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
+squashfuse /dss/dssmcmlfs01/pn67gu/pn67gu-dss-0000/zverev/datasets/vggsound.squashfs /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
+
 # Activate your conda environment (adjust if needed)
 source activate onellm
 set -x
