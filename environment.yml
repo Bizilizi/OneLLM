@@ -187,7 +187,7 @@ dependencies:
       - pyparsing==3.2.3
       - python-dateutil==2.9.0.post0
       - python-multipart==0.0.20
-      - pytorchvideo==0.1.5
+      - git+https://github.com/facebookresearch/pytorchvideo.git@6cdc929315aab1b5674b6dcf73b16ec99147735f
       - pytz==2025.2
       - pyyaml==6.0.2
       - regex==2024.11.6
