@@ -33,7 +33,7 @@ set -x
 export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 
 modality=$1
-echo "This is $modality"
+echo "This is $modality, page $SLURM_ARRAY_TASK_ID"
 
 # Run the script on each node, assigning each task to a different GPU
 srun --exclusive --ntasks=1 python process_vggsound.py \
