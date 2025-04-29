@@ -13,8 +13,10 @@
 #SBATCH --mail-user=zverev@in.tum.de
 #SBATCH --output=./logs/slurm-%j-%A_%a.out
 #SBATCH --error=./logs/slurm-%j-%A_%a.out
-
+ 
 nvidia-smi
+source activate onellm
+conda install conda-forge::squashfs-tools  
 
 # Mount squashfs files
 cleanup () {
