@@ -11,8 +11,8 @@
 #SBATCH --time=48:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zverev@in.tum.de
-#SBATCH --output=./logs/slurm-%j-%A_%a.out
-#SBATCH --error=./logs/slurm-%j-%A_%a.out
+#SBATCH --output=./logs/slurm-%A_%a.out
+#SBATCH --error=./logs/slurm-%A_%a.out
  
 nvidia-smi
 source activate onellm
@@ -28,7 +28,7 @@ trap cleanup EXIT
 
 echo "Mounting VGGsound"
 mkdir -p /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
-squashfuse /dss/dssmcmlfs01/pn67gu/pn67gu-dss-0000/zverev/datasets/vggsound.squashfs /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
+/usr/bin/squashfuse /dss/dssmcmlfs01/pn67gu/pn67gu-dss-0000/zverev/datasets/vggsound.squashfs /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
 
 # Activate your conda environment (adjust if needed)
 source activate onellm
