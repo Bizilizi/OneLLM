@@ -138,7 +138,7 @@ def write_predictions_csv(predictions, responses, output_csv):
     }
     df = pd.DataFrame.from_dict(df_table, orient="index")
     df.to_csv(output_csv, index=False)
-    print(f"Predictions CSV saved to {output_csv}")
+    tqdm.write(f"Predictions CSV saved to {output_csv}")
 
 
 @torch.inference_mode()
@@ -175,7 +175,7 @@ def process_video(
             inputs = load_video(video_path)
             inputs = inputs[None].cuda().to(target_dtype)
         except Exception as e:
-            print(f"Error loading video {video_id}: {e}")
+            tqdm.write(f"Error loading video {video_id}: {e}")
             return [], f"Error: {str(e)}"
 
     elif modality == "a":
@@ -183,7 +183,7 @@ def process_video(
             inputs = load_audio(audio_path)
             inputs = inputs.cuda().to(target_dtype)
         except Exception as e:
-            print(f"Error loading audio {audio_path}: {e}")
+            tqdm.write(f"Error loading audio {audio_path}: {e}")
             return [], f"Error: {str(e)}"
 
     elif modality == "av":
@@ -450,7 +450,7 @@ def main():
             write_predictions_csv(predictions, responses, args.output_csv)
 
         except Exception as e:
-            print(f"Error processing video {video_id}: {e}")
+            tqdm.write(f"Error processing video {video_id}: {e}")
             continue
 
 
