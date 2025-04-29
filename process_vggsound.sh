@@ -1,3 +1,4 @@
+#!/bin/sh
 #SBATCH --job-name="onellm"
 #SBATCH --array=1-15
 #SBATCH --nodes=1
