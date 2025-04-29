@@ -41,6 +41,7 @@ echo "This is $modality, page $SLURM_ARRAY_TASK_ID"
 
 # Run the script on each node, assigning each task to a different GPU
 srun --exclusive --ntasks=1 python process_vggsound.py \
+    --master_port $((23862 + $SLURM_ARRAY_TASK_ID)) \
     --gpu_ids 0 \
     --tokenizer_path config/llama2/tokenizer.model \
     --llama_config config/llama2/7B.json \
