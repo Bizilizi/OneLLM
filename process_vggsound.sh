@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --gres=gpu:1
-#SBATCH --partition=mcml-hgx-a100-80x4
+#SBATCH --partition=mcml-hgx-a100-80x4,mcml-hgx-h100-94x4,mcml-dgx-a100-40x8
 #SBATCH --qos=mcml
 #SBATCH --mem=48G
 #SBATCH --time=48:00:00
@@ -24,6 +24,7 @@ cleanup () {
 
 trap cleanup EXIT
 
+echo "Mounting VGGsound"
 mkdir -p /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
 squashfuse /dss/dssmcmlfs01/pn67gu/pn67gu-dss-0000/zverev/datasets/vggsound.squashfs /tmp/zverev/$SLURM_ARRAY_TASK_ID/vggsound
 
