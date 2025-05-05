@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --job-name="onellm"
-#SBATCH --array=1-15
+#SBATCH --array=1-16
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -51,5 +51,5 @@ srun --exclusive --ntasks=1 python process_vggsound.py \
     --page $SLURM_ARRAY_TASK_ID \
     --per_page 1000 \
     --modality $modality \
-    --prompt_mode single \
-    --prompt "From the given list of classes, which one do you see in this video? Answer only with the class names. Classes: {cl}"
+    --prompt_mode multi \
+    --prompt "Do you see or hear {cl} class in this video? Answer only with yes or no."
