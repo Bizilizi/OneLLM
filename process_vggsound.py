@@ -162,7 +162,7 @@ def process_video(
     video_path = os.path.join(dataset_path, "video", video_id)
     audio_path = None
 
-    if modality == "av" or modality == "audio":
+    if modality == "av" or modality == "a":
         audio_path = os.path.join(
             dataset_path, "audio", video_id.replace(".mp4", ".wav")
         )
