@@ -39,7 +39,7 @@ echo "This is $modality, page $SLURM_PROCID"
 
 CMD="
 python process_vggsound.py \
-    --master_port $((23862 + \$SLURM_PROCID)) \
+    --master_port \$((23862 + \$SLURM_PROCID)) \
     --gpu_ids \$SLURM_LOCALID \
     --tokenizer_path config/llama2/tokenizer.model \
     --llama_config config/llama2/7B.json \
