@@ -1,10 +1,9 @@
 #!/bin/sh
 #SBATCH --job-name="onellm"
-#SBATCH --array=1-16
 #SBATCH --nodes=1
-#SBATCH --ntasks=1
+#SBATCH --ntasks=2
 #SBATCH --cpus-per-task=8
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --partition=mcml-hgx-a100-80x4,mcml-hgx-h100-94x4,mcml-dgx-a100-40x8
 #SBATCH --qos=mcml
 #SBATCH --mem=48G
@@ -41,7 +40,7 @@ echo "This is $modality, page $SLURM_PROCID"
 CMD="
 python process_vggsound.py \
     --master_port $((23862 + \$SLURM_PROCID)) \
-    --gpu_ids 0 \
+    --gpu_ids \$SLURM_LOCALID \
     --tokenizer_path config/llama2/tokenizer.model \
     --llama_config config/llama2/7B.json \
     --pretrained_path weights/consolidated.00-of-01.pth \
