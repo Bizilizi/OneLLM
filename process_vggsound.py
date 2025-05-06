@@ -423,6 +423,11 @@ def main():
     args.output_csv = args.output_csv.replace(
         ".csv", f"_{args.prompt_mode}_page_{args.page}.csv"
     )
+    
+    if os.path.exists(args.output_csv):
+        already_processed = pd.read_csv(args.output_csv)
+        already_processed = set(already_processed["video_id"].tolist())
+        page_videos = [vid for vid in page_videos if vid not in already_processed]
 
     predictions = {}
     responses = {}
