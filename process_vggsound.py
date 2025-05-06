@@ -3,7 +3,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(__file__).rsplit("/", 2)[0])
-
+import traceback
 import argparse
 import torch
 import pandas as pd
@@ -455,7 +455,7 @@ def main():
             write_predictions_csv(predictions, responses, args.output_csv)
 
         except Exception as e:
-            tqdm.write(f"Error processing video {video_id}: {e}")
+            tqdm.write(f"Error processing video {video_id}: {traceback.format_exc()}")
             continue
 
 
