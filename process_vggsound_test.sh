@@ -10,23 +10,23 @@
 #SBATCH --time=48:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zverev@in.tum.de
-#SBATCH --output=./logs/slurm-%A_%a.out
-#SBATCH --error=./logs/slurm-%A_%a.out
+#SBATCH --output=./logs/slurm-%A.out
+#SBATCH --error=./logs/slurm-%A.out
  
 nvidia-smi
 source activate onellm
 
 # Mount squashfs files
 cleanup () {
-    fusermount -u /tmp/zverev/$SLURM_PROCID/vggsound
-    rmdir /tmp/zverev/$SLURM_PROCID/vggsound
+    fusermount -u /tmp/zverev/vggsound
+    rmdir /tmp/zverev/vggsound
 }
 
 trap cleanup EXIT
 
 echo "Mounting VGGsound"
-mkdir -p /tmp/zverev/$SLURM_PROCID/vggsound
-/usr/bin/squashfuse /dss/dssmcmlfs01/pn67gu/pn67gu-dss-0000/zverev/datasets/vggsound.squashfs /tmp/zverev/$SLURM_PROCID/vggsound
+mkdir -p /tmp/zverev/vggsound
+/usr/bin/squashfuse /dss/dssmcmlfs01/pn67gu/pn67gu-dss-0000/zverev/datasets/vggsound.squashfs /tmp/zverev/vggsound
 
 # Activate your conda environment (adjust if needed)
 source activate onellm
@@ -44,7 +44,7 @@ python process_vggsound.py \
     --tokenizer_path config/llama2/tokenizer.model \
     --llama_config config/llama2/7B.json \
     --pretrained_path weights/consolidated.00-of-01.pth \
-    --dataset_path /tmp/zverev/\$SLURM_PROCID/vggsound \
+    --dataset_path /tmp/zverev/vggsound \
     --video_csv ../../data/train.csv \
     --output_csv csv/$modality/predictions.csv \
     --page \$SLURM_PROCID \
