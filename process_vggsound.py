@@ -181,7 +181,7 @@ def process_video(
     elif modality == "a":
         try:
             inputs = load_audio(audio_path)
-            inputs = inputs.cuda().to(target_dtype)
+            inputs = inputs[None].cuda().to(target_dtype)
         except Exception as e:
             tqdm.write(f"Error loading audio {audio_path}: {e}")
             return [], f"Error: {str(e)}"
